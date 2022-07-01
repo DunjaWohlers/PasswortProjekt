@@ -81,7 +81,7 @@ class MainTest {
 
     @Test
     void istNichtSchlecht(){
-        String str="Passwort123";
+        String str="Passwort13";
         boolean bo=Main.isBad(str);
         boolean exp=false;
         Assertions.assertEquals(exp,bo);
