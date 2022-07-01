@@ -54,7 +54,7 @@ public class Main {
     public static boolean isPerfect(String str) {
         String regEx = "\\D{3,5}\\d{1,3}";
         return str.matches(regEx);
-    }jalsdjfö
+    }
 
     public static boolean hasLowerCase(String str) {
         boolean hasLowerCase = false;
