@@ -80,7 +80,7 @@ class MainTest {
     }
 
     @Test
-    void istNichtSchlecht(){
+    void istSchlecht2(){
         String str="Passwort13";
         boolean bo=Main.isBad(str);
         boolean exp=false;
@@ -91,6 +91,22 @@ class MainTest {
     void istSchlechtZahl(){
         String str="12345";
         boolean bo=Main.isBad(str);
+        boolean exp=true;
+        Assertions.assertEquals(exp,bo);
+    }
+
+    @Test
+    void isPerfectNo(){
+        String str="#Pass34";
+        boolean bo=Main.isPerfect(str);
+        boolean exp=false;
+        Assertions.assertEquals(exp,bo);
+    }
+
+    @Test
+    void isPerfectYes(){
+        String str="PASg4";
+        boolean bo=Main.isPerfect(str);
         boolean exp=true;
         Assertions.assertEquals(exp,bo);
     }

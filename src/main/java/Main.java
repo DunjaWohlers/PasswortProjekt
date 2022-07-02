@@ -52,7 +52,7 @@ public class Main {
     }
 
     public static boolean isPerfect(String str) {
-        String regEx = "\\D{3,5}\\d{1,3}";
+        String regEx = "[A-Za-z]{3,5}\\d{1,3}";
         return str.matches(regEx);
     }
 
