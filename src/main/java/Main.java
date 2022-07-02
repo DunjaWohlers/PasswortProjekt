@@ -3,33 +3,62 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        ausgabe();
+        String message = "Keine Nachricht vorhanden";
+        String input = "";
+        while (message != "") {
+            input = scan();
+            message = passwortPruefen(input);
+            System.out.println(message);
+        }
+
+        if (message == "") {//keine Error-Nachricht vorhanden:
+            message = positiveFeedback(input);
+        } else {
+        }
+        System.out.println(message);
     }
 
-    public static void ausgabe() {
+    public static String scan() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Bitte gib ein Passwort ein:");
-        String inputStr = sc.nextLine();
+        return sc.nextLine();
+    }
 
-        if (hasLowerCase(inputStr)) {
-            System.out.println("Dein Passwort enthält Kleinbuchstaben, versuchs noch einmal!");
-            ausgabe();
-        } else {
-            System.out.println("Das Passwort enthält keine KLeinbuchstaben und wird weiter überprüft!");
-        }
-        if (hasLength3To10(inputStr)) {
-            System.out.println("Die Länge passt!");
-        } else {
-            System.out.println("Die Länge passt nicht!");
-        }
-        if (hasNumber(inputStr)) {
-            System.out.println("Das Passwort enthält mehr als eine Nummer");
-        } else {
-            System.out.println("Das Passwort enthält keine Nummer");
-        }
 
-        boolean perfect = isPerfect(inputStr);
-        System.out.println("Das Passwort ist genial!?" + perfect);
+    public static String passwortPruefen(String inputStr) {
+        String message = "";
+        if (!hasLowerCase(inputStr) || !hasUpperCase(inputStr) || !hasLength3To10(inputStr) || !hasNumber(inputStr)) {
+            message = errorNachricht(inputStr);
+        } else {
+        }
+        return message;
+    }
+
+    public static String positiveFeedback(String inputStr) {
+        if (isPerfect(inputStr)) {
+            return "Ich mag dein Passwort, es ist perfekt!\n";
+        } else {
+            return "Das Passwort genügt den Anforderungen!\n";
+        }
+    }
+
+    public static String errorNachricht(String inputStr) {
+        String error = "";
+        if (!hasLowerCase(inputStr)) {
+            error += "Dein Passwort enthält keine Kleinbuchstaben, versuchs noch einmal!\n";
+        } else {
+        }
+        if (!hasUpperCase(inputStr)) {
+            error += "Dein Passwort enthält keine Großbuchstaben, versuchs noch einmal!\n";
+        }
+        if (!hasLength3To10(inputStr)) {
+            error += "Die Länge muss zwischen 3 und 10 Zeichen betragen!\n";
+        } else {
+        }
+        if (!hasNumber(inputStr)) {
+            error += "Dein Passwort muss mindestens eine Nummer enthalten!\n";
+        }
+        return error;
     }
 
     public static boolean hasLength3To10(String str) {
@@ -51,10 +80,6 @@ public class Main {
         return str.charAt(zaehler);
     }
 
-    public static boolean isPerfect(String str) {
-        String regEx = "[A-Za-z]{3,5}\\d{1,3}";
-        return str.matches(regEx);
-    }
 
     public static boolean hasLowerCase(String str) {
         boolean hasLowerCase = false;
@@ -68,7 +93,25 @@ public class Main {
         return hasLowerCase;
     }
 
+    public static boolean hasUpperCase(String str) {
+        boolean hasUpperCase = false;
+        for (int i = 0; i < str.length(); i++) {
+            char x = pickLetterAt(str, i);
+            if (Character.isUpperCase(x)) {
+                hasUpperCase = true;
+            }
+            ;
+        }
+        return hasUpperCase;
+    }
+
     public static boolean isBad(String str) {
         return str.equalsIgnoreCase("PASSWORT") || str.contains("123") || str.contains("234");
+    }
+
+
+    public static boolean isPerfect(String str) {
+        String regEx = "[A-Za-z]{3,5}\\d{1,3}";
+        return str.matches(regEx);
     }
 }
